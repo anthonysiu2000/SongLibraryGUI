@@ -17,10 +17,16 @@
    
    	  
    	  <!--Represents the list of music-->
-      <AnchorPane prefHeight="400.0" prefWidth="299.0">
+      <AnchorPane 
+      		xmlns="http://javafx.com/javafx/8"
+      		xmlns:fx="http://javafx.com/fxml/1"
+			fx:controller="view.SongLibController"
+			prefHeight="400.0" prefWidth="299.0">
+			
          <children>
             <ListView fx:id="musicList" prefHeight="400.0" prefWidth="299.0" AnchorPane.bottomAnchor="10.0" AnchorPane.leftAnchor="10.0" AnchorPane.rightAnchor="10.0" AnchorPane.topAnchor="10.0" />
          </children>
+         
       </AnchorPane>
       
       
