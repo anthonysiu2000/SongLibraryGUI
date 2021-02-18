@@ -16,7 +16,7 @@ import view.SongLibController;
 
 
 
-public class asdf extends Application {
+public class SongLib extends Application {
 
 	@Override
 	public void start(Stage primaryStage) throws Exception {
