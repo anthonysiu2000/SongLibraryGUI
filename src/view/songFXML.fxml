@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--Created by Anthony Siu and Benjamin Lee-->
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<!--Represents the entire window-->
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="view.SongLibController">
+   <children>
+      
+      
+      <ListView fx:id="musicList1" layoutX="8.0" layoutY="8.0" prefHeight="384.0" prefWidth="280.0" />
+      
+      
+      
+      <Text fx:id="textDetailName" layoutX="310.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " wrappingWidth="300">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textDetailArtist" layoutX="310.0" layoutY="70.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: " wrappingWidth="300">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textDetailAlbum" layoutX="310.0" layoutY="105.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album: " wrappingWidth="300">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textDetailYear" layoutX="310.0" layoutY="140.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:" wrappingWidth="300">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      
+      
+      <Button fx:id="buttonEdit" layoutX="415.0" layoutY="160.0" mnemonicParsing="false" text="Edit" />
+      <Button fx:id="buttonAdd" layoutX="319.0" layoutY="160.0" mnemonicParsing="false" text="Add" />
+      <Button fx:id="buttonDelete" layoutX="516.0" layoutY="160.0" mnemonicParsing="false" text="Delete" />
+      
+            
+      <!--Represents the text below the buttons for instructions when button is pressed-->
+      <Text fx:id="textInstruct" layoutX="310.0" layoutY="210.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="263.13671875" />
+   
+         
+  	  <!--Represents the text part of the song input-->
+      <Text fx:id="textInputName" layoutX="310.0" layoutY="240.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textInputArtist" layoutX="310.0" layoutY="275.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textInputAlbum" layoutX="310.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      <Text fx:id="textInputYear" layoutX="310.0" layoutY="345.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year: ">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+      
+            
+      <!--Represents the text fields of Song Add/Edit-->
+      <TextField fx:id="textfieldName" layoutX="380.0" layoutY="220.0" prefHeight="30.0" prefWidth="201.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="textfieldArtist" layoutX="380.0" layoutY="255.0" prefHeight="30.0" prefWidth="201.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="textfieldAlbum" layoutX="380.0" layoutY="290.0" prefHeight="30.0" prefWidth="201.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      <TextField fx:id="textfieldYear" layoutX="380.0" layoutY="325.0" prefHeight="30.0" prefWidth="201.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </TextField>
+      
+            
+      <!--Represents the text below the input fields, to be used when stating an error-->
+      <Text fx:id="textError" layoutX="310.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="263.13671875" />
+      
+      
+   </children>
+</Pane>

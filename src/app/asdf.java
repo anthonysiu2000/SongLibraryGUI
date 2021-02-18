@@ -5,37 +5,34 @@ package app;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import view.SongLibController;
 
 
 
-public class SongLib extends Application {
+public class asdf extends Application {
 
-	public void start(Stage primaryStage)
-	throws Exception {
+	@Override
+	public void start(Stage primaryStage) throws Exception {
 		
-		//Code for Unanchored List GUI
 		
 		FXMLLoader loader = new FXMLLoader();
-		loader.setLocation(getClass().getResource("/view/SongLib.fxml"));
+		loader.setLocation(getClass().getResource("/view/songFXML.fxml"));
 		
 		
-		AnchorPane root = (AnchorPane)loader.load();
+		Pane root = (Pane)loader.load();
 		
-		SongLibController songLibController =
-				loader.getController();
-		songLibController.start();
+		SongLibController songLibController = loader.getController();
+		songLibController.start(primaryStage);
 		
 		
-		Scene scene = new Scene(root, 200, 300);
+		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
