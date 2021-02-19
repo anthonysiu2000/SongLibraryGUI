@@ -5,12 +5,7 @@ package app;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.ListView;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import view.SongLibController;
 
@@ -28,12 +23,13 @@ public class SongLib extends Application {
 		
 		Pane root = (Pane)loader.load();
 		
-		SongLibController songLibController = loader.getController();
-		songLibController.start(primaryStage);
-		
+		SongLibController libController = loader.getController();
+		libController.start(primaryStage);
 		
 		Scene scene = new Scene(root);
 		primaryStage.setScene(scene);
+		primaryStage.setTitle("Song-Library");
+		primaryStage.setResizable(false);
 		primaryStage.show();
 	}
 	
