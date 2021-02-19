@@ -16,26 +16,26 @@
    <children>
       
       
-      <ListView fx:id="musicList" layoutX="8.0" layoutY="8.0" prefHeight="384.0" prefWidth="280.0" />
+      <ListView fx:id="musicList" layoutX="8.0" layoutY="28.0" prefHeight="364.0" prefWidth="280.0" />
       
       
       
-      <Text fx:id="textDetailName" layoutX="310.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Name: " wrappingWidth="300">
+      <Text fx:id="textDetailName" layoutX="310.0" layoutY="46.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="300">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="textDetailArtist" layoutX="310.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Artist: " wrappingWidth="300">
+      <Text fx:id="textDetailArtist" layoutX="310.0" layoutY="79.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="300">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="textDetailAlbum" layoutX="310.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Album: " wrappingWidth="300">
+      <Text fx:id="textDetailAlbum" layoutX="310.0" layoutY="112.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="300">
          <font>
             <Font size="20.0" />
          </font>
       </Text>
-      <Text fx:id="textDetailYear" layoutX="310.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Year:" wrappingWidth="300">
+      <Text fx:id="textDetailYear" layoutX="310.0" layoutY="145.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="300">
          <font>
             <Font size="20.0" />
          </font>
@@ -107,6 +107,7 @@
       <Line endX="221.0" endY="0.01953125" layoutX="389.0" layoutY="150.0" startX="-89.5" startY="0.01953125" />
       <Line endY="392.0" layoutX="300.0" layoutY="8.0" startY="-8.0" />
       <Line endX="222.29290771484375" layoutX="388.0" layoutY="197.0" startX="-87.5" />
+      <Text layoutX="124.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song List" />
       
       
    </children>
