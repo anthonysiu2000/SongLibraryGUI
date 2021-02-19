@@ -72,8 +72,10 @@ public class SongLibController {
 		// List listening function
 		musicList.getSelectionModel().selectedIndexProperty().addListener(
 				(obs, oldVal, newVal) -> showDetail(mainStage));
+		
 		// select the first item
 		musicList.getSelectionModel().select(0);
+		
 		//Need to implement save button
 		
 	}
@@ -88,8 +90,11 @@ public class SongLibController {
 		textDetailYear.setText("Year: " + songData.get(index)[3]);
 	}
 	
+	
+	
 	//Method called when button is pressed
 	public void buttonPress(ActionEvent e) {
+		int index = musicList.getSelectionModel().getSelectedIndex();
 		Button b = (Button)e.getSource();
 		
 		//If the second button pressed is incorrect, we state an error, and do not pass the action
@@ -123,7 +128,10 @@ public class SongLibController {
 				buttonNumber = 2;
 				
 				//Sets text fields to current song's details
-				
+				textFieldName.setText(songData.get(index)[0]);
+				textFieldArtist.setText(songData.get(index)[1]);
+				textFieldAlbum.setText(songData.get(index)[2]);
+				textFieldYear.setText(songData.get(index)[3]);
 				
 				
 				
