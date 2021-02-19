@@ -67,12 +67,26 @@ public class SongLibController {
 			textInstruct.setText("Song List is Empty. Add songs please.");
 		}
 		
+		
+		
+		// List listening function
+		musicList.getSelectionModel().selectedIndexProperty().addListener(
+				(obs, oldVal, newVal) -> showDetail(mainStage));
 		// select the first item
 		musicList.getSelectionModel().select(0);
+		//Need to implement save button
+		
 	}
 	
 	
-	
+	//Method called when selecting an item from this list
+	public void showDetail(Stage mainStage) {
+		int index = musicList.getSelectionModel().getSelectedIndex();
+		textDetailName.setText("Name: " + songData.get(index)[0]);
+		textDetailArtist.setText("Artist: " + songData.get(index)[1]);
+		textDetailAlbum.setText("Album: " + songData.get(index)[2]);
+		textDetailYear.setText("Year: " + songData.get(index)[3]);
+	}
 	
 	//Method called when button is pressed
 	public void buttonPress(ActionEvent e) {
@@ -191,9 +205,11 @@ public class SongLibController {
 		
 		
 		else {
+			
 			//If empty list, output error
 			
 			//Deletes song from Song Library
+			prevButton = buttonDelete;
 			
 			//Selects the next song, if possible
 			
@@ -213,6 +229,13 @@ public class SongLibController {
 		textInputArtist.setText("");
 		textInputAlbum.setText("");
 		textInputYear.setText("");
+	}
+	
+	
+	//Method called to reset songData, songArrayList, and obsList for a new/edited addition to the ArrayList
+	//Accepts String fields as inputs of the added/edited song
+	public void resetAlphaOrder(String inputName, String inputArtist, String inputAlbum, String inputYear) {
+		
 	}
 
 }
