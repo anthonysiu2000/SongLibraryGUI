@@ -76,9 +76,6 @@ public class SongLibController {
 		
 		// select the first item
 		musicList.getSelectionModel().select(0);
-		
-		//Need to implement save button
-		
 	}
 	
 	
@@ -158,6 +155,8 @@ public class SongLibController {
 				}
 				
 				//Otherwise, song's fields are updated and selected
+				songData.remove(index);
+				resetAlphaOrder(editName, editArtist, editAlbum, editYear);
 				
 				resetFields();
 				textInstruct.setText("Edit Successful.");
@@ -208,6 +207,7 @@ public class SongLibController {
 				}
 				
 				//Otherwise, song is added and selected
+				resetAlphaOrder(addName, addArtist, addAlbum, addYear);
 				
 				resetFields();
 				textInstruct.setText("Add Successful.");
@@ -229,6 +229,10 @@ public class SongLibController {
 			
 			//Deletes song from Song Library
 			prevButton = buttonDelete;
+			textDetailName.setText("");
+			textDetailArtist.setText("");
+			textDetailAlbum.setText("");
+			textDetailYear.setText("");
 			songData.remove(index);
 			songArrayList = new ArrayList<String>();
 			for (int i = 0; i < songData.size(); i++) {
@@ -236,7 +240,6 @@ public class SongLibController {
 			}
 			obsList = FXCollections.observableArrayList(songArrayList); 
 			musicList.setItems(obsList); 
-			
 			//Selects the next song
 			if (songData.size() == 0) {
 				musicList.getSelectionModel().select(0);
@@ -291,7 +294,6 @@ public class SongLibController {
 			if (i == index) {
 				continue;
 			}
-			System.out.println("checking Song " + i);
 			if (songData.get(i)[0].equals(inputName) && songData.get(i)[1].equals(inputArtist)) {
 				return true;
 			}
@@ -303,7 +305,32 @@ public class SongLibController {
 	//Method called to reset songData, songArrayList, and obsList for a new/edited addition to the ArrayList
 	//Accepts String fields as inputs of the added/edited song
 	public void resetAlphaOrder(String inputName, String inputArtist, String inputAlbum, String inputYear) {
+		String[] input = {inputName, inputArtist, inputAlbum, inputYear};
+		int newIndex = songData.size() - 1;
+		if (songData.size() == 0) {
+			newIndex = 0;
+		}
+		for (int j = 0; j < songData.size(); j++) {
+			if (inputName.compareTo(songData.get(j)[0]) == 0) {
+				if (inputArtist.compareTo(songData.get(j)[0]) > 0) {
+					newIndex = j;
+					break;
+				}
+			} else
+			if (inputName.compareTo(songData.get(j)[0]) > 0) {
+				newIndex = j;
+				break;
+			}
+		}
 		
+		songData.add(newIndex, input);
+		songArrayList = new ArrayList<String>();
+		for (int i = 0; i < songData.size(); i++) {
+			songArrayList.add(songData.get(i)[0] + " by " + songData.get(i)[1]);
+		}
+		obsList = FXCollections.observableArrayList(songArrayList); 
+		musicList.setItems(obsList); 
+		musicList.getSelectionModel().select(newIndex);
 	}
 	
 	
