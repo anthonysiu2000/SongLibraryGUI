@@ -306,31 +306,48 @@ public class SongLibController {
 	//Accepts String fields as inputs of the added/edited song
 	public void resetAlphaOrder(String inputName, String inputArtist, String inputAlbum, String inputYear) {
 		String[] input = {inputName, inputArtist, inputAlbum, inputYear};
-		int newIndex = songData.size() - 1;
+		int newIndex = 0;
 		if (songData.size() == 0) {
 			newIndex = 0;
 		}
+		
+		boolean beforeEntry = true;
+		
 		for (int j = 0; j < songData.size(); j++) {
+			if (inputName.compareTo(songData.get(j)[0]) < 0) {
+				newIndex = j;
+				break;
+			} else
+			
 			if (inputName.compareTo(songData.get(j)[0]) == 0) {
-				if (inputArtist.compareTo(songData.get(j)[0]) > 0) {
+				
+				if (inputArtist.compareTo(songData.get(j)[1]) < 0) {
 					newIndex = j;
 					break;
 				}
-			} else
-			if (inputName.compareTo(songData.get(j)[0]) > 0) {
-				newIndex = j;
-				break;
+			}
+			if (j == (songData.size() - 1)) {
+				beforeEntry = false;
 			}
 		}
 		
-		songData.add(newIndex, input);
+		if (beforeEntry == false) {
+			songData.add(input);
+		} else {
+			songData.add(newIndex, input);
+		}
+		
 		songArrayList = new ArrayList<String>();
 		for (int i = 0; i < songData.size(); i++) {
 			songArrayList.add(songData.get(i)[0] + " by " + songData.get(i)[1]);
 		}
 		obsList = FXCollections.observableArrayList(songArrayList); 
 		musicList.setItems(obsList); 
-		musicList.getSelectionModel().select(newIndex);
+		if (beforeEntry == false) {
+			musicList.getSelectionModel().select(songData.size() - 1);
+		} else {
+			musicList.getSelectionModel().select(newIndex);
+		}
 	}
 	
 	
