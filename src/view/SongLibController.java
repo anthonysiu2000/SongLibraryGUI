@@ -5,6 +5,7 @@ package view;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -34,7 +35,7 @@ public class SongLibController {
 	//Stores in all song data
 	private ArrayList<String[]> songData = new ArrayList<String[]>();
 	
-	//Stores strings used in the Observable List
+	//Stores strings used in the Observable List aka. "name by artist"
 	private ArrayList<String> songArrayList = new ArrayList<String>();
 	
 	//Initiates the Observable List
@@ -81,16 +82,6 @@ public class SongLibController {
 	}
 	
 	
-	//Method called when selecting an item from this list
-	public void showDetail(Stage mainStage) {
-		int index = musicList.getSelectionModel().getSelectedIndex();
-		textDetailName.setText("Name: " + songData.get(index)[0]);
-		textDetailArtist.setText("Artist: " + songData.get(index)[1]);
-		textDetailAlbum.setText("Album: " + songData.get(index)[2]);
-		textDetailYear.setText("Year: " + songData.get(index)[3]);
-	}
-	
-	
 	
 	//Method called when button is pressed
 	public void buttonPress(ActionEvent e) {
@@ -112,13 +103,20 @@ public class SongLibController {
 		
 		//Implementing Button functions
 		
+		//User will press Edit twice, once to initiate text fields, and the second time to submit them
 		if (b == buttonEdit) {
 			
 			//If Empty List, output error
+			if (songData.size() == 0) {
+				textError.setText("Error: no songs to edit. Please add a song.");
+				textInstruct.setText("");
+				resetFields();
+				return;
+			}
 			
-			//User will press Edit twice, once to initiate text fields, and the second time to submit them
 			//First Button Press
 			if (buttonNumber == 1) {
+				//Instructs user
 				textInstruct.setText("Please edit fields, then press Edit again.");
 				textInputName.setText("Name: ");
 				textInputArtist.setText("Artist: ");
@@ -133,8 +131,6 @@ public class SongLibController {
 				textFieldAlbum.setText(songData.get(index)[2]);
 				textFieldYear.setText(songData.get(index)[3]);
 				
-				
-				
 			//Second Button Press	
 			} else {
 				
@@ -144,6 +140,7 @@ public class SongLibController {
 				String editAlbum = textFieldAlbum.getText();
 				String editYear = textFieldYear.getText();
 				
+				
 				//Name nor Artist may not be blank
 				if (editName == "" || editArtist == "") {
 					textError.setText("Error: name nor artist may be edited to blank");
@@ -151,16 +148,16 @@ public class SongLibController {
 					resetFields();
 					return;
 				}
-				
 
 				//Name and Artist cannot both match existing song
-				
+				if (checkDuplicate(editName, editArtist, index) == true) {
+					textError.setText("Error: name and artist cannot match existing song.");
+					textInstruct.setText("");
+					resetFields();
+					return;
+				}
 				
 				//Otherwise, song's fields are updated and selected
-				
-				
-				
-				
 				
 				resetFields();
 				textInstruct.setText("Edit Successful.");
@@ -169,11 +166,13 @@ public class SongLibController {
 		
 		
 		
+		
+		//User will press Add twice, once to initiate text fields, and the second time to submit them
 		else if (b == buttonAdd) {
 			
-			//User will press Add twice, once to initiate text fields, and the second time to submit them
 			//First Button Press
 			if (buttonNumber == 1) {
+				//Instructs User
 				textInstruct.setText("Please edit fields, then press Add again.");
 				textInputName.setText("Name: ");
 				textInputArtist.setText("Artist: ");
@@ -191,6 +190,7 @@ public class SongLibController {
 				String addAlbum = textFieldAlbum.getText();
 				String addYear = textFieldYear.getText();
 				
+				
 				//Name and Artist must be entered at the least
 				if (addName == "" || addArtist == "") {
 					textError.setText("Error: To add a song, you must include name AND artist, at the least.");
@@ -200,11 +200,14 @@ public class SongLibController {
 				}
 				
 				//Name and Artist cannot both match existing song
-				
+				if (checkDuplicate(addName, addArtist, -1) == true) {
+					textError.setText("Error: name and artist cannot match existing song.");
+					textInstruct.setText("");
+					resetFields();
+					return;
+				}
 				
 				//Otherwise, song is added and selected
-				
-				
 				
 				resetFields();
 				textInstruct.setText("Add Successful.");
@@ -212,19 +215,59 @@ public class SongLibController {
 		}
 		
 		
+		
+		//Delete Button will only need one button press; no confirmation window
 		else {
 			
 			//If empty list, output error
+			if (songData.size() == 0) {
+				textError.setText("Error: no songs to delete. Please add a song.");
+				textInstruct.setText("");
+				resetFields();
+				return;
+			}
 			
 			//Deletes song from Song Library
 			prevButton = buttonDelete;
+			songData.remove(index);
+			songArrayList = new ArrayList<String>();
+			for (int i = 0; i < songData.size(); i++) {
+				songArrayList.add(songData.get(i)[0] + " by " + songData.get(i)[1]);
+			}
+			obsList = FXCollections.observableArrayList(songArrayList); 
+			musicList.setItems(obsList); 
 			
-			//Selects the next song, if possible
-			
+			//Selects the next song
+			if (songData.size() == 0) {
+				musicList.getSelectionModel().select(0);
+			}
+			else if (index < songData.size()) {
+				musicList.getSelectionModel().select(index);
+			}
+			else {
+				musicList.getSelectionModel().select(index - 1);
+			}
 			
 			textInstruct.setText("Delete Successful.");
 		}
 	}
+	
+	
+
+	
+	
+	//Method called when selecting an item from this list
+	public void showDetail(Stage mainStage) {
+		int index = musicList.getSelectionModel().getSelectedIndex();
+		if (index < 0) {
+			return;
+		}
+		textDetailName.setText("Name: " + songData.get(index)[0]);
+		textDetailArtist.setText("Artist: " + songData.get(index)[1]);
+		textDetailAlbum.setText("Album: " + songData.get(index)[2]);
+		textDetailYear.setText("Year: " + songData.get(index)[3]);
+	}
+	
 	
 	//Method called by buttonPress when operation is finished
 	public void resetFields(){ 
@@ -239,11 +282,45 @@ public class SongLibController {
 		textInputYear.setText("");
 	}
 	
+	//Method called to check if input name and artist already exist within the data
+	//accepts song name, artist, and index of edited song, if editing
+	public boolean checkDuplicate(String inputName, String inputArtist, int index) {
+		
+		//parses through song data to see if there is a match with both name and artist
+		for (int i = 0; i < songData.size(); i++) {
+			if (i == index) {
+				continue;
+			}
+			System.out.println("checking Song " + i);
+			if (songData.get(i)[0].equals(inputName) && songData.get(i)[1].equals(inputArtist)) {
+				return true;
+			}
+		}
+		return false;
+		
+	}
 	
 	//Method called to reset songData, songArrayList, and obsList for a new/edited addition to the ArrayList
 	//Accepts String fields as inputs of the added/edited song
 	public void resetAlphaOrder(String inputName, String inputArtist, String inputAlbum, String inputYear) {
 		
+	}
+	
+	
+	
+	
+	//Method called when save button is selected
+	public void saveButton() throws IOException {
+		//writes to a file
+		FileWriter txtWriter = new FileWriter("src/view/songList.txt");
+		for (int i = 0; i < songData.size(); i++) {
+		    txtWriter.append(songData.get(i)[0] + "\t" + songData.get(i)[1] + "\t" + songData.get(i)[2] + "\t" + songData.get(i)[3]);
+		    txtWriter.append("\n");
+		}
+		txtWriter.flush();
+		txtWriter.close();
+		
+		textInstruct.setText("Library Saved. You may now close the application.");
 	}
 
 }

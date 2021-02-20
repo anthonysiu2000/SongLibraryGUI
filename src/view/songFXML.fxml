@@ -98,7 +98,7 @@
       
             
       <!--Represents the text below the input fields, to be used when stating an error-->
-      <Text fx:id="textError" layoutX="310.0" layoutY="380.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="263.13671875" />
+      <Text fx:id="textError" layoutX="310.0" layoutY="367.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="241.13671875" />
       <Text layoutX="422.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Details:" />
       
       
@@ -108,6 +108,7 @@
       <Line endY="392.0" layoutX="300.0" layoutY="8.0" startY="-8.0" />
       <Line endX="222.29290771484375" layoutX="388.0" layoutY="197.0" startX="-87.5" />
       <Text layoutX="124.0" layoutY="19.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Song List" />
+      <Button fx:id="buttonSave" layoutX="553.0" layoutY="362.0" mnemonicParsing="false" onAction="#saveButton" text="Save" />
       
       
    </children>
